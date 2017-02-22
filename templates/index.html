@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Search for Torrents</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/pure-min.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+	</head>
+	<body>
+		<div class="header-container">
+			<div class="header">Torrents</div>
+			<a href="http://{{ ip }}:9091" class="pure-button button-dashboard">Dashboard</a>
+		</div>
+		<div class="menu-container">
+			<div class="menu">
+				<a href="#" class="menu-item menu-item-title">
+					Get Torrents<br>Now!
+				</a>
+				<form class="menu-item menu-item-form pure-form" method="get" action="/search">
+					<input type="search" name="q" class="menu-item-searchbar" placeholder="Search torrents">
+					<input type="submit" class="pure-button pure-button-primary menu-item-button">
+				</form>				
+			</div>	
+		</div>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Search for Torrents</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/pure-min.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+	</head>
+	<body>
+		<div class="header-container">
+			<div class="header">Torrents</div>
+		</div>
+		<div class="menu-container">
+			<div class="menu">				
+				{% if success %}
+				<a href="#" class="menu-item menu-item-title">Torrent added, hooray!</a>
+				<a href="http://{{ ip }}:9091" class="menu-item pure-button pure-button-primary menu-item-to-transmission">Transmission Web Interface</a>
+				{% else %}
+				<a href="#" class="menu-item menu-item-title">Somehing went wrong...</a>
+				{% endif %}					
+			</div>	
+		</div>
+	</body>
+</html>

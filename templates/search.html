@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Search for Torrents</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/pure-min.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/search.css') }}">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+	</head>
+	<body>
+		<div class="header-container">
+			<div class="header">Torrents</div>
+		</div>
+		<div class="table-container">
+			<table class="pure-table pure-table-bordered">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Size</th>
+						<th>Seeders</th>
+						<th>Leechers</th>
+					</tr>
+				</thead>
+			{% for torrent in torrents %}
+				<tr>
+					<td class="table-cell"><a href="/add?m={{ torrent.magnet_link | urlencode }}">{{ torrent.title }}</a></td>
+					<td class="table-cell-size">{{ torrent.size }}</td>
+					<td class="table-cell-seed">{{ torrent.seeders }}</td>
+					<td class="table-cell-leech">{{ torrent.leechers }}</td>
+				</tr>
+			{% endfor %}
+			</table>	
+		</div>
+	</body>
+</html>
