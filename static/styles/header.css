@@ -1,0 +1,16 @@
+.header-container {
+	padding: 10px;
+	height: 50px;
+	width: 100%;
+	background-color: var(--main-color);
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	font-size: 1.5em;
+}
+
+.button-dashboard {
+	height: 100%;
+	font-size: 0.6em;
+	font-weight: 400;
+}
