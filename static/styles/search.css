@@ -32,6 +32,8 @@ table {
 
 .table-cell {
 	color: white;
+	display: flex;
+	justify-content: flex-start;
 }
 
 .table-cell-size {

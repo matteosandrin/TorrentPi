@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% include 'modules/head.html' %}
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/search.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/downloads.css') }}">
+	</head>
+	<body>
+		{% include 'modules/header.html' %}
+		<div class="table-container">
+			<table class="pure-table pure-table-bordered">
+				<thead>
+					<tr>
+						<th>Title</th>
+					</tr>
+				</thead>
+			{% for file in files %}
+				<tr>
+					<td class="table-cell">
+					{% if file.isdir %}
+						<img src="{{ url_for('static',filename='images/folder-icon.png') }}" class="folder-icon"/>
+					{% else %}
+						<div class="folder-icon"></div>
+					{% endif %}
+					{% set temp = ['ftp://', ip, path, file.name] %}
+						<a href="{{ temp | join }}">{{ file.name }}</a>
+					</td>
+				</tr>
+			{% endfor %}
+			</table>	
+		</div>
+	</body>
+</html>

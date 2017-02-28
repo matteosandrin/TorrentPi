@@ -2,9 +2,14 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from engine import get_data, add_torrent
+from os import listdir
+from os.path import isdir
+import json
 
 app = Flask(__name__)
 ip = "192.168.1.64"
+downloads_path = "/home/teo/Downloads/transmission/completed"
+
 
 @app.route('/')
 def index():
@@ -24,6 +29,16 @@ def add():
 	print magnet
 	success = add_torrent(magnet,ip)
 	return render_template('add.html',success=success,ip=ip)
+
+@app.route('/downloads',methods=["GET"])
+def downloads():
+	file_names = listdir(downloads_path)
+	files = []
+	for filename in file_names:
+		if filename[0] != '$' and filename[0] != '.':
+			files.append({'name': filename, 'isdir': isdir(downloads_path + filename)})
+	files = sorted(files, key=lambda k: k['isdir'],reverse=True)
+	return render_template('downloads.html', files=files, ip=ip, path=downloads_path)
 
 if __name__ == "__main__":
 	app.run(host="0.0.0.0")
