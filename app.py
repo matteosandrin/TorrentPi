@@ -4,6 +4,7 @@ from flask import request
 from engine import get_data, add_torrent
 from os import listdir
 from os.path import isdir
+from os.path import join as path_join
 import json
 
 app = Flask(__name__)
@@ -36,7 +37,7 @@ def downloads():
 	files = []
 	for filename in file_names:
 		if filename[0] != '$' and filename[0] != '.':
-			files.append({'name': filename, 'isdir': isdir(downloads_path + filename)})
+			files.append({'name': filename, 'isdir': isdir(path_join(downloads_path, filename))})
 	files = sorted(files, key=lambda k: k['isdir'],reverse=True)
 	return render_template('downloads.html', files=files, ip=ip, path=downloads_path)
 
