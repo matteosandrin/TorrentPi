@@ -15,15 +15,17 @@
 					</tr>
 				</thead>
 			{% for file in files %}
+				{% set temp = ['/downloads', file.path] %}
 				<tr>
 					<td class="table-cell">
 					{% if file.isdir %}
 						<img src="{{ url_for('static',filename='images/folder-icon.png') }}" class="folder-icon"/>
+						<a href="{{ temp | join }}">{{ file.name }}</a>
 					{% else %}
 						<div class="folder-icon"></div>
+						<a href="#">{{ file.name }}</a>
 					{% endif %}
-					{% set temp = ['ftp://', ip, path, file.name] %}
-						<a href="{{ temp | join }}">{{ file.name }}</a>
+						
 					</td>
 				</tr>
 			{% endfor %}

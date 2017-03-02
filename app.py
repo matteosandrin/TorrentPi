@@ -9,8 +9,8 @@ import json
 
 app = Flask(__name__)
 ip = "192.168.1.64"
-downloads_path = "/home/teo/Downloads/transmission/completed"
-# downloads_path = "/Users/matteosandrin/Downloads"
+#downloads_path = "/home/teo/Downloads/transmission/completed"
+downloads_path = "/Users/matteosandrin/Downloads"
 
 
 @app.route('/')
@@ -33,14 +33,19 @@ def add():
 	return render_template('add.html',success=success,ip=ip)
 
 @app.route('/downloads',methods=["GET"])
-def downloads():
-	file_names = listdir(downloads_path)
+def downloads(path=downloads_path):
+	file_names = listdir(path)
 	files = []
 	for filename in file_names:
 		if filename[0] != '$' and filename[0] != '.':
-			files.append({'name': filename, 'isdir': isdir(path_join(downloads_path, filename))})
+			files.append({'name': filename, 'isdir': isdir(path_join(path, filename)),'path':path_join(path, filename)})
+	files = sorted(files, key=lambda k: k['name'])
 	files = sorted(files, key=lambda k: k['isdir'],reverse=True)
-	return render_template('downloads.html', files=files, ip=ip, path=downloads_path)
+	return render_template('downloads.html', files=files, ip=ip, path=path)
+
+@app.route('/downloads/<path:path>',methods=["GET"])
+def downloads_file(path):
+	return downloads('/'+path)
 
 if __name__ == "__main__":
 	app.run(host="0.0.0.0")

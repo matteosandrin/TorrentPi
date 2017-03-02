@@ -1,5 +1,11 @@
 <div class="header-container">
-	<div class="header">Torrents</div>
+	<div class="header">
+		<a href="/">Torrents</a>
+	</div>
+	<form class="pure-form header-searchbar-form" method="get" action="/search">
+		<input type="search" class="search-field" name="q" placeholder="Search torrents">
+		<input type="submit" class="pure-button search-button" value="Search">
+	</form>
 	<div class="buttons-container">
 		<a href="/downloads" class="pure-button button-dashboard">Downloads</a>
 		<a href="http://{{ ip }}:9091" class="pure-button button-dashboard">Dashboard</a>
