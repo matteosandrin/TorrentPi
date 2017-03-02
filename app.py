@@ -21,7 +21,7 @@ def index():
 def search():
 	q = request.args.get('q')
 	if len(q) > 0:
-		return render_template('search.html', torrents=get_data(q),ip=ip)
+		return render_template('search.html', torrents=get_data(q),ip=ip,query=q)
 	else:
 		return render_template('search.html',ip=ip)
 
