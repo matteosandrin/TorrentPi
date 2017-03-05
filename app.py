@@ -1,16 +1,13 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from engine import get_data, add_torrent
-from os import listdir
-from os.path import isdir
-from os.path import join as path_join
-import json
+from engine import get_data, add_torrent, list_files
+
 
 app = Flask(__name__)
 ip = "192.168.1.64"
-downloads_path = "/home/teo/Downloads/transmission/completed"
-# downloads_path = "/Users/matteosandrin/Downloads"
+#downloads_path = "/home/teo/Downloads/transmission/completed"
+downloads_path = "/Users/matteosandrin/Downloads"
 
 
 @app.route('/')
@@ -32,20 +29,18 @@ def add():
 	success = add_torrent(magnet,ip)
 	return render_template('add.html',success=success,ip=ip)
 
-@app.route('/downloads',methods=["GET"])
-def downloads(path=downloads_path):
-	file_names = listdir(path)
-	files = []
-	for filename in file_names:
-		if filename[0] != '$' and filename[0] != '.':
-			files.append({'name': filename, 'isdir': isdir(path_join(path, filename)),'path':path_join(path, filename)})
-	files = sorted(files, key=lambda k: k['name'])
-	files = sorted(files, key=lambda k: k['isdir'],reverse=True)
+@app.route('/files/',methods=["GET"])
+@app.route('/files/<path:path>',methods=["GET"])
+def files(path=''):
+	files = list_files(downloads_path,path)
 	return render_template('downloads.html', files=files, ip=ip, path=path)
-
-@app.route('/downloads/<path:path>',methods=["GET"])
-def downloads_file(path):
-	return downloads('/'+path)
 
 if __name__ == "__main__":
 	app.run(host="0.0.0.0")
+
+
+
+
+
+
+
