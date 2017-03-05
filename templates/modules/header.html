@@ -3,8 +3,10 @@
 		<a href="/">Torrents</a>
 	</div>
 	<form class="pure-form header-searchbar-form" method="get" action="/search">
+		{% if request.path != "/" %}
 		<input type="search" class="search-field" name="q" placeholder="Search torrents" value="{{ query }}">
 		<input type="submit" class="pure-button search-button" value="Search">
+		{% endif %}
 	</form>
 	<div class="buttons-container">
 		<a href="/files" class="pure-button button-dashboard">Downloads</a>
