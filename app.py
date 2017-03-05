@@ -6,8 +6,8 @@ from engine import get_data, add_torrent, list_files
 
 app = Flask(__name__)
 ip = "192.168.1.64"
-#downloads_path = "/home/teo/Downloads/transmission/completed"
-downloads_path = "/Users/matteosandrin/Downloads"
+downloads_path = "/home/teo/Downloads/transmission/completed"
+# downloads_path = "/Users/matteosandrin/Downloads"
 
 
 @app.route('/')
