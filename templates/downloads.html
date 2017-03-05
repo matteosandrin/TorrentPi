@@ -22,7 +22,7 @@
 						{% set temp = ['/files/', file.rel_path] %}
 						<img src="{{ url_for('static',filename='images/folder-icon.png') }}" class="folder-icon"/>
 					{% else %}
-						{% set temp = ['ftp://', ip, file.full_path] %}
+						{% set temp = ['ftp://', ip, file.ftp_path] %}
 						<div class="folder-icon"></div>
 					{% endif %}
 						<a href="{{ temp | join }}">{{ file.name }}</a>

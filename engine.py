@@ -4,6 +4,7 @@ import requests, sys, json
 from os import listdir
 from os.path import isdir
 from os.path import join as path_join
+from os.path import expanduser
 
 def get_data(q):
 	t = TPB('https://thepiratebay.org')
@@ -37,14 +38,15 @@ def add_torrent(magnet,ip):
 		print "Error"
 		return False
 
-def list_files(base,path):
+def list_files(user, base, path):
 	full_path = path_join(base,path)
 	file_names = listdir(full_path)
 	files = []
 	for filename in file_names:
 		if filename[0] != '$' and filename[0] != '.':
 			joint = path_join(full_path, filename)
-			files.append({'name': filename, 'isdir': isdir(joint),'full_path': joint, 'rel_path': path_join(path,filename)})
+			home = expanduser('~'+user)
+			files.append({'name': filename, 'isdir': isdir(joint),'ftp_path': joint.replace(home,""), 'rel_path': path_join(path,filename)})
 	files = sorted(files, key=lambda k: k['name'])
 	files = sorted(files, key=lambda k: k['isdir'],reverse=True)
 	return files
