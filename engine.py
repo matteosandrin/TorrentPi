@@ -46,7 +46,7 @@ def list_files(user, base, path):
 		if filename[0] != '$' and filename[0] != '.':
 			joint = path_join(full_path, filename)
 			home = expanduser('~'+user)
-			files.append({'name': filename, 'isdir': isdir(joint),'ftp_path': joint.replace(home,""), 'rel_path': path_join(path,filename)})
+			files.append({'name': filename.encode("utf-8"), 'isdir': isdir(joint),'ftp_path': joint.replace(home,""), 'rel_path': path_join(path,filename)})
 	files = sorted(files, key=lambda k: k['name'])
 	files = sorted(files, key=lambda k: k['isdir'],reverse=True)
 	return files
