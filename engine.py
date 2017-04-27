@@ -5,6 +5,7 @@ from os import listdir
 from os.path import isdir
 from os.path import join as path_join
 from os.path import expanduser
+from unidecode import unidecode
 
 def get_data(q):
 	t = TPB('https://thepiratebay.org')
@@ -46,7 +47,8 @@ def list_files(user, base, path):
 		if filename[0] != '$' and filename[0] != '.':
 			joint = path_join(full_path, filename)
 			home = expanduser('~'+user)
-			files.append({'name': filename.encode("utf-8"), 'isdir': isdir(joint),'ftp_path': joint.replace(home,""), 'rel_path': path_join(path,filename)})
+			filename = ''.join(i for i in filename if ord(i)<128)
+			files.append({'name': unidecode(unicode(filename)), 'isdir': isdir(joint),'ftp_path': joint.replace(home,""), 'rel_path': path_join(path,filename)})
 	files = sorted(files, key=lambda k: k['name'])
 	files = sorted(files, key=lambda k: k['isdir'],reverse=True)
 	return files
