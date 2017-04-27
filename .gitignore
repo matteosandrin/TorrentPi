@@ -1,3 +1,4 @@
 tpb_client_linux
 *.pyc
 .DS_Store
+logs
