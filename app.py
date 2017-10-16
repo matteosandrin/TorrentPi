@@ -8,8 +8,6 @@ app = Flask(__name__)
 ip = "192.168.1.64"
 downloads_path = "/home/teo/Downloads/transmission/completed"
 ftp_user = 'teo'
-# downloads_path = "/Users/matteosandrin/Downloads"
-# ftp_user = 'matteosandrin'
 
 
 @app.route('/')
